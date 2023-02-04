@@ -3,6 +3,6 @@
     <string name="home">홈</string>
     <string name="search_worker">조회</string>
     <string name="add_worker">추가</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_worker_title">직원 추가</string>
+    <string name="detail_info">상세 정보</string>
 </resources>
