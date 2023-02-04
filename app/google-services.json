@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "875500937744",
+    "project_id": "cheesepay-b8bc7",
+    "storage_bucket": "cheesepay-b8bc7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:875500937744:android:0469f33d6fb193d7036095",
+        "android_client_info": {
+          "package_name": "com.example.cheesepay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "875500937744-hpngasi1ig5h4u6bv1dtmjh4h0ni6mgo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cheesepay",
+            "certificate_hash": "11c0156da1e066042b5c90493f65dacd9f3a9806"
+          }
+        },
+        {
+          "client_id": "875500937744-omj0iuluhe1pf8kkj5unoep9kepe3ogi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJvdDVYz8clvoPeDjsErXUbI6fwHzAECQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "875500937744-omj0iuluhe1pf8kkj5unoep9kepe3ogi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
