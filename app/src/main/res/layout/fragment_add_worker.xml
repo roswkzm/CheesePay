@@ -143,21 +143,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="주소"
+                android:text="근무 형태"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_phone_number" />
 
-            <EditText
-                android:id="@+id/et_address"
-                android:layout_width="match_parent"
+            <Spinner
+                android:id="@+id/sp_worker_type"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_address"
-                android:hint="주소를 입력하세요..."/>
+                app:layout_constraintTop_toBottomOf="@+id/tv_address" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -172,7 +171,7 @@
             android:textStyle="bold"
             android:textSize="20dp"
             android:text="저장"/>
-
+z
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

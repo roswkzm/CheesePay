@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="worker_type_list">
+        <item>메인강사</item>
+        <item>보조강사</item>
+        <item>출강강사</item>
+        <item>시급/일급</item>
+    </string-array>
+</resources>
