@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="worker"
+            type="com.example.cheesepay.model.WorkerDTO" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/workerImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_baseline_person_24"
+            search_worker_glide="@{worker.profileUrl}"/>
+
+        <TextView
+            android:id="@+id/workerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="@{worker.name}"
+            app:layout_constraintEnd_toEndOf="@+id/workerImage"
+            app:layout_constraintStart_toStartOf="@+id/workerImage"
+            app:layout_constraintTop_toBottomOf="@+id/workerImage"
+            tools:text="홍길동"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

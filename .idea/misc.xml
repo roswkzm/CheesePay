@@ -11,7 +11,9 @@
         <entry key="app/src/main/res/layout/dialog_confirm.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_add_worker.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.14361702127659576" />
-        <entry key="app/src/main/res/layout/fragment_search_worker.xml" value="0.13677811550151975" />
+        <entry key="app/src/main/res/layout/fragment_search_worker.xml" value="0.2049837199559013" />
+        <entry key="app/src/main/res/layout/item_search_worker.xml" value="0.24139492753623187" />
+        <entry key="app/src/main/res/layout/item_worker.xml" value="0.24139492753623187" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.153125" />
         <entry key="app/src/main/res/menu/fdfdf.xml" value="0.15833333333333333" />
       </map>

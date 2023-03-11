@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cheesepay.R
 import com.example.cheesepay.databinding.FragmentSearchWorkerBinding
 import com.example.cheesepay.ui.viewModel.SearchWorkerViewModel
@@ -18,6 +20,7 @@ class SearchWorkerFragment : Fragment() {
     private var _binding : FragmentSearchWorkerBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<SearchWorkerViewModel>()
+    lateinit var workerAdapter: SearchWorkerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +28,29 @@ class SearchWorkerFragment : Fragment() {
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_worker, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initUI()
+        subscribeUI()
+    }
+
+    private fun initUI(){
+        workerAdapter = SearchWorkerAdapter()
+
+        binding.rvWorker.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = workerAdapter
+        }
+
+        viewModel.getWorkerData()
+    }
+    private fun subscribeUI(){
+        viewModel.workerData.observe(viewLifecycleOwner, Observer { workerList ->
+            workerAdapter.setWorkerData(workerList)
+        })
     }
 
     override fun onDestroyView() {
