@@ -4,13 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -20,7 +21,6 @@ import com.example.cheesepay.R
 import com.example.cheesepay.databinding.FragmentAddWorkerBinding
 import com.example.cheesepay.model.WorkerDTO
 import com.example.cheesepay.ui.viewModel.AddWorkerViewModel
-import com.example.cheesepay.ui.viewModel.MainViewModel
 import com.example.cheesepay.util.Constants.PICK_IMAGE_FROM_ALBUM
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,7 +30,6 @@ class AddWorkerFragment : Fragment() {
     private var _binding : FragmentAddWorkerBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<AddWorkerViewModel>()
-    private val activityViewModel by activityViewModels<MainViewModel>()
     private var photoUri : Uri? = null
 
     override fun onCreateView(
@@ -82,21 +81,21 @@ class AddWorkerFragment : Fragment() {
             viewModel.uploadWorkerInfo(workerInfo)
         })
 
-        viewModel.isSaveSuccess.observe(viewLifecycleOwner, Observer { it ->
-            val isSuccess = it.getContentIfNotHandled()
-            if (isSuccess!!){
-                findNavController().popBackStack()
-                findNavController().navigate(R.id.calendarFragment)
+        viewModel.showDialogMsg.observe(this, Observer { it ->
+            it.getContentIfNotHandled()?.let { message ->
+                val action = AddWorkerFragmentDirections.actionAddWorkerFragmentToConfirmDialog(message, AddWorkerFragment::class.java.simpleName)
+                findNavController().navigate(action)
             }
         })
 
-        viewModel.toastErrorMsg.observe(this, Observer { msg ->
-            activityViewModel.showErrorMsg(msg)
-        })
-
         viewModel.isShowProgressBar.observe(this, Observer { it ->
-            var isShow = it.getContentIfNotHandled()
-            activityViewModel.isShowProgressBar(isShow!!)
+            it.getContentIfNotHandled()?.let { isShow ->
+                if (isShow){
+                    binding.progressBar.visibility = View.VISIBLE
+                } else {
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
         })
     }
 
@@ -110,6 +109,22 @@ class AddWorkerFragment : Fragment() {
 
     override fun onDestroyView() {
         _binding = null
+        Log.d("AddWorkerFragment  : ", "onDestroyView")
         super.onDestroyView()
+    }
+
+    override fun onStop() {
+        Log.d("AddWorkerFragment  : ", "OnStop")
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        Log.d("AddWorkerFragment  : ", "onDestroy")
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        Log.d("AddWorkerFragment  : ", "onDetach")
+        super.onDetach()
     }
 }

@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import com.example.cheesepay.R
 import com.example.cheesepay.databinding.FragmentSearchWorkerBinding
+import com.example.cheesepay.ui.viewModel.SearchWorkerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,6 +17,7 @@ class SearchWorkerFragment : Fragment() {
 
     private var _binding : FragmentSearchWorkerBinding? = null
     private val binding get() = _binding!!
+    private val viewModel by viewModels<SearchWorkerViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

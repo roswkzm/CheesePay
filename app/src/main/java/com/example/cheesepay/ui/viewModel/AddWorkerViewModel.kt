@@ -19,14 +19,14 @@ class AddWorkerViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-    private val _toastErrorMsg = MutableLiveData<String>()
-    val toastErrorMsg: LiveData<String> = _toastErrorMsg
+    private val _showDialogMsg = MutableLiveData<Event<String>>()
+    val showDialogMsg: LiveData<Event<String>> = _showDialogMsg
     private val _imageDownloadUrl = MutableLiveData<String?>()
     val imageDownloadUrl: LiveData<String?> = _imageDownloadUrl
     private val _isShowProgressBar = MutableLiveData<Event<Boolean>>()
     val isShowProgressBar: LiveData<Event<Boolean>> = _isShowProgressBar
-    private val _isSaveSuccess = MutableLiveData<Event<Boolean>>()
-    val isSaveSuccess: LiveData<Event<Boolean>> = _isSaveSuccess
+    private val _showDialog = MutableLiveData<String>()
+    val showDialog: LiveData<String> = _showDialog
 
     fun uploadWorkerImage(photoUri : Uri?, workerName : String){
         _isShowProgressBar.value = Event(true)
@@ -37,7 +37,7 @@ class AddWorkerViewModel @Inject constructor(
             }.addOnSuccessListener { uri ->
                 _imageDownloadUrl.value = uri.toString()
             }.addOnFailureListener { error ->
-                _toastErrorMsg.value = "사진 업로드에 실패하였습니다."
+                _showDialogMsg.value = Event("사진 업로드에 실패하였습니다.")
                 _isShowProgressBar.value = Event(false)
             }
         } else {
@@ -50,11 +50,13 @@ class AddWorkerViewModel @Inject constructor(
         db.collection("workers").document(workerInfo.name)
             .set(workerInfo)
             .addOnSuccessListener { documentReference ->
-                _isSaveSuccess.value = Event(true)
+                _showDialogMsg.value = Event("직원정보 저장에 성공하였습니다.")
             }
             .addOnFailureListener { e ->
-                _toastErrorMsg.value = "직원정보 저장에 실패하였습니다."
+                _showDialogMsg.value = Event("직원정보 저장에 실패하였습니다.")
             }
         _isShowProgressBar.value = Event(false)
     }
+
+
 }

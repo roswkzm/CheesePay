@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
     app:startDestination="@id/calendarFragment">
 
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.example.cheesepay.ui.view.CalendarFragment"
-        android:label="@string/home" />
+        android:label="@string/home"
+        tools:layout="@layout/fragment_calendar"/>
     <fragment
         android:id="@+id/searchWorkerFragment"
         android:name="com.example.cheesepay.ui.view.SearchWorkerFragment"
-        android:label="@string/search_worker" />
+        android:label="@string/search_worker"
+        tools:layout="@layout/fragment_search_worker"/>
     <fragment
         android:id="@+id/addWorkerFragment"
         android:name="com.example.cheesepay.ui.view.AddWorkerFragment"
-        android:label="@string/add_worker" />
+        android:label="@string/add_worker"
+        tools:layout="@layout/fragment_add_worker">
+        <action
+            android:id="@+id/action_addWorkerFragment_to_confirmDialog"
+            app:destination="@id/confirmDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/confirmDialog"
+        android:name="com.example.cheesepay.ui.view.ConfirmDialog"
+        android:label="ConfirmDialog"
+        tools:layout="@layout/dialog_confirm">
+        <argument
+            android:name="message"
+            app:argType="string" />
+        <argument
+            android:name="fromWhere"
+            app:argType="string" />
+    </dialog>
 </navigation>
