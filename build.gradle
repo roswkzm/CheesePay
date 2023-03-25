@@ -25,6 +25,7 @@ buildscript {
         activity_version = "1.4.0"
         fragment_version = "1.4.1"
         hilt_extension = "1.0.0"
+        calendarview_version = "1.6.1"
     }
 }
 

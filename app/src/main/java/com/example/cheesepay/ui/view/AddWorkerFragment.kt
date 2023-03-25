@@ -21,7 +21,7 @@ import com.example.cheesepay.R
 import com.example.cheesepay.databinding.FragmentAddWorkerBinding
 import com.example.cheesepay.model.WorkerDTO
 import com.example.cheesepay.ui.viewModel.AddWorkerViewModel
-import com.example.cheesepay.util.Constants.PICK_IMAGE_FROM_ALBUM
+import com.example.cheesepay.util.CommonUtil.Companion.PICK_IMAGE_FROM_ALBUM
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

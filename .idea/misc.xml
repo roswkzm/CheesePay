@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.2953703703703704" />
         <entry key="app/src/main/res/drawable-v24/radius_8dp_white.xml" value="0.2814814814814815" />
         <entry key="app/src/main/res/drawable/radius_8dp_white.xml" value="0.2814814814814815" />
         <entry key="app/src/main/res/drawable/splash_screen.xml" value="0.22407407407407406" />
@@ -10,7 +11,7 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/dialog_confirm.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_add_worker.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.14361702127659576" />
+        <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_search_worker.xml" value="0.2049837199559013" />
         <entry key="app/src/main/res/layout/item_search_worker.xml" value="0.24139492753623187" />
         <entry key="app/src/main/res/layout/item_worker.xml" value="0.24139492753623187" />
