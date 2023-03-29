@@ -19,6 +19,7 @@
             android:gravity="center"
             android:minHeight="50dp"
             android:textSize="14sp"
+            android:textStyle="bold"
             tools:text="확인창입니다." />
 
         <LinearLayout

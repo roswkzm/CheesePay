@@ -10,8 +10,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/dialog_confirm.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_add_task.xml" value="0.22962962962962963" />
         <entry key="app/src/main/res/layout/fragment_add_worker.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.30095368829485236" />
         <entry key="app/src/main/res/layout/fragment_search_worker.xml" value="0.2049837199559013" />
         <entry key="app/src/main/res/layout/item_search_worker.xml" value="0.24139492753623187" />
         <entry key="app/src/main/res/layout/item_worker.xml" value="0.24139492753623187" />

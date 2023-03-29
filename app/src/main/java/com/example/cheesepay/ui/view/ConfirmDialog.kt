@@ -36,6 +36,7 @@ class ConfirmDialog : DialogFragment() {
         binding.btnOk.setOnClickListener {
             when(fromWhere){
                 AddWorkerFragment::class.java.simpleName -> findNavController().navigate(R.id.calendarFragment)
+                AddTaskFragment::class.java.simpleName -> findNavController().navigate(R.id.calendarFragment)
                 else -> findNavController().navigate(R.id.calendarFragment)
             }
         }

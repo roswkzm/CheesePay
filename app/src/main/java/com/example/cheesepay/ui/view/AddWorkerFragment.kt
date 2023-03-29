@@ -57,9 +57,7 @@ class AddWorkerFragment : Fragment() {
         }
 
         binding.btnSave.setOnClickListener {
-
             val workerName = binding.etName.text.toString()
-            val workerType = binding.spWorkerType.selectedItem.toString()
 
             workerName.let {
                 viewModel.uploadWorkerImage(photoUri, it)

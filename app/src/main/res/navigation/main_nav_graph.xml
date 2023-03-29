@@ -9,7 +9,11 @@
         android:id="@+id/calendarFragment"
         android:name="com.example.cheesepay.ui.view.CalendarFragment"
         android:label="@string/home"
-        tools:layout="@layout/fragment_calendar"/>
+        tools:layout="@layout/fragment_calendar">
+        <action
+            android:id="@+id/action_calendarFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchWorkerFragment"
         android:name="com.example.cheesepay.ui.view.SearchWorkerFragment"
@@ -36,4 +40,16 @@
             android:name="fromWhere"
             app:argType="string" />
     </dialog>
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.example.cheesepay.ui.view.AddTaskFragment"
+        android:label="AddTaskFragment"
+        tools:layout="@layout/fragment_add_task">
+        <argument
+            android:name="selectDate"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_addTaskFragment_to_confirmDialog"
+            app:destination="@id/confirmDialog" />
+    </fragment>
 </navigation>

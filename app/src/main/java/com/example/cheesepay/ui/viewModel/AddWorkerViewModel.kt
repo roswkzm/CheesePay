@@ -25,8 +25,6 @@ class AddWorkerViewModel @Inject constructor(
     val imageDownloadUrl: LiveData<String?> = _imageDownloadUrl
     private val _isShowProgressBar = MutableLiveData<Event<Boolean>>()
     val isShowProgressBar: LiveData<Event<Boolean>> = _isShowProgressBar
-    private val _showDialog = MutableLiveData<String>()
-    val showDialog: LiveData<String> = _showDialog
 
     fun uploadWorkerImage(photoUri : Uri?, workerName : String){
         _isShowProgressBar.value = Event(true)

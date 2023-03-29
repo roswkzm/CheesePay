@@ -10,8 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.applikeysolutions.cosmocalendar.utils.SelectionType
-import com.applikeysolutions.cosmocalendar.view.CalendarView
+import androidx.navigation.fragment.findNavController
 import com.example.cheesepay.R
 import com.example.cheesepay.databinding.FragmentCalendarBinding
 import com.example.cheesepay.util.CommonUtil
@@ -53,13 +52,29 @@ class CalendarFragment : Fragment() {
 
         setCalendarView()
         binding.selectButton.setOnClickListener {
-              if (calendarView.selectedDates.isNotEmpty()) {
-//                  Log.d("ㅎㅇㅎㅇ", commonUtil.getSelectDateTime(calendarView.selectedDate))
-                  Log.d("ㅎㅇㅎㅇ", calendarView.selectedDate.toString())
-              } else{
-                  Toast.makeText(requireContext(), "날짜를 선택해주세요.", Toast.LENGTH_SHORT).show()
-              }
+            if (isDateSelect()){
+                Log.d("ㅎㅇㅎㅇ", calendarView.selectedDate.toString())
+            } else{
+                Toast.makeText(requireContext(), "날짜를 선택해주세요.", Toast.LENGTH_SHORT).show()
+            }
         }
+
+        binding.addButton.setOnClickListener {
+            if (isDateSelect()){
+                var selectDate = commonUtil.getSelectDateTime(calendarView.selectedDate.date)
+                val action = CalendarFragmentDirections.actionCalendarFragmentToAddTaskFragment(selectDate)
+                findNavController().navigate(action)
+            } else {
+                Toast.makeText(requireContext(), "날짜를 선택해주세요.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun isDateSelect(): Boolean {
+        if (calendarView.selectedDates.isNotEmpty()) {
+            return true
+        }
+        return false
     }
 
     private fun setCalendarView(){
