@@ -12,6 +12,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -32,7 +33,7 @@ class AddTaskFragment : Fragment() {
     private var _binding : FragmentAddTaskBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<AddTaskFragmentArgs>()
-    private val viewModel by viewModels<TaskViewModel>()
+    private val viewModel by activityViewModels<TaskViewModel>()
 
     @Inject
     lateinit var commonUtil: CommonUtil

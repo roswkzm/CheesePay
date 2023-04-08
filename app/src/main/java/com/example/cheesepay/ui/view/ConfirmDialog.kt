@@ -34,6 +34,7 @@ class ConfirmDialog : DialogFragment() {
         binding.tvMessage.text = message
 
         binding.btnOk.setOnClickListener {
+            dismiss()
             when(fromWhere){
                 AddWorkerFragment::class.java.simpleName -> findNavController().navigate(R.id.calendarFragment)
                 AddTaskFragment::class.java.simpleName -> findNavController().navigate(R.id.calendarFragment)

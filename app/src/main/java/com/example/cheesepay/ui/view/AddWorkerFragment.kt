@@ -57,12 +57,19 @@ class AddWorkerFragment : Fragment() {
         }
 
         binding.btnSave.setOnClickListener {
-            val workerName = binding.etName.text.toString()
-
-            workerName.let {
-                viewModel.uploadWorkerImage(photoUri, it)
+            if (isDataNotNull()){
+                viewModel.uploadWorkerImage(photoUri, binding.etName.text.toString())
+            } else{
+                Toast.makeText(requireContext(), "입력안된 정보가 있습니다.", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun isDataNotNull() : Boolean {
+        return !binding.etName.text.isNullOrEmpty() &&
+                !binding.frontSocialNumber.text.isNullOrEmpty() &&
+                !binding.backSocialNumber.text.isNullOrEmpty() &&
+                !binding.etPhoneNumber.text.isNullOrEmpty()
     }
 
     private fun subscribeUI() {
@@ -103,26 +110,5 @@ class AddWorkerFragment : Fragment() {
             photoUri = data?.data
             Glide.with(this).load(photoUri).apply(RequestOptions().circleCrop()).into(binding.ivProfile)
         }
-    }
-
-    override fun onDestroyView() {
-        _binding = null
-        Log.d("AddWorkerFragment  : ", "onDestroyView")
-        super.onDestroyView()
-    }
-
-    override fun onStop() {
-        Log.d("AddWorkerFragment  : ", "OnStop")
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        Log.d("AddWorkerFragment  : ", "onDestroy")
-        super.onDestroy()
-    }
-
-    override fun onDetach() {
-        Log.d("AddWorkerFragment  : ", "onDetach")
-        super.onDetach()
     }
 }

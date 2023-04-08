@@ -21,7 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/ic_baseline_person_24"
-            search_worker_glide="@{worker.profileUrl}"/>
+            circleCrop_glide="@{worker.profileUrl}"/>
 
         <TextView
             android:id="@+id/workerName"
