@@ -66,7 +66,8 @@ class CalendarFragment : Fragment() {
         }
 
         userTaskAdapter.setOnItemClickListener {
-            Toast.makeText(requireContext(), "아이템 클릭", Toast.LENGTH_SHORT).show()
+            val action = CalendarFragmentDirections.actionCalendarFragmentToModifyTaskFragment(it)
+            findNavController().navigate(action)
         }
 
         setCalendarView()

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_calendarFragment_to_addTaskFragment"
             app:destination="@id/addTaskFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_modifyTaskFragment"
+            app:destination="@id/modifyTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchWorkerFragment"
@@ -50,6 +53,18 @@
             app:argType="string" />
         <action
             android:id="@+id/action_addTaskFragment_to_confirmDialog"
+            app:destination="@id/confirmDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyTaskFragment"
+        android:name="com.example.cheesepay.ui.view.ModifyTaskFragment"
+        android:label="ModifyTaskFragment"
+        tools:layout="@layout/fragment_modify_task">
+        <argument
+            android:name="taskInfo"
+            app:argType="com.example.cheesepay.model.TaskDTO" />
+        <action
+            android:id="@+id/action_modifyTaskFragment_to_confirmDialog"
             app:destination="@id/confirmDialog" />
     </fragment>
 </navigation>

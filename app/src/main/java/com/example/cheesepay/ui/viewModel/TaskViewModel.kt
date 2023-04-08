@@ -59,6 +59,7 @@ class TaskViewModel @Inject constructor(
     fun getSelectDateTask(selectDate : String){
         var selectDateTasks : ArrayList<TaskDTO> = arrayListOf()
         db.collection("tasks").document(selectDate).collection(selectDate).addSnapshotListener { value, error ->
+            selectDateTasks.clear()
             if (value == null) return@addSnapshotListener
             for (snapshot in value.documents){
                 selectDateTasks.add(snapshot.toObject(TaskDTO::class.java)!!)
