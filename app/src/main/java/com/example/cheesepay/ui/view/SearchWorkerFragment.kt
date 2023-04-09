@@ -1,6 +1,7 @@
 package com.example.cheesepay.ui.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cheesepay.R
 import com.example.cheesepay.databinding.FragmentSearchWorkerBinding
@@ -43,6 +45,11 @@ class SearchWorkerFragment : Fragment() {
         binding.rvWorker.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = workerAdapter
+        }
+
+        workerAdapter.setOnItemClickListener { it ->
+            val action = SearchWorkerFragmentDirections.actionSearchWorkerFragmentToWorkerMontyPayFragment(it)
+            findNavController().navigate(action)
         }
 
         viewModel.getWorkerData()

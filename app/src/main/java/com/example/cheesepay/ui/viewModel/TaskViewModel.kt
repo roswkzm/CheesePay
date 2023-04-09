@@ -56,6 +56,20 @@ class TaskViewModel @Inject constructor(
             }
     }
 
+    fun deleteTaskInfo(taskDTO: TaskDTO){
+        _isShowProgressBar.value = Event(true)
+        db.collection("tasks").document(taskDTO.date).collection(taskDTO.date).document(taskDTO.name)
+            .delete()
+            .addOnCompleteListener {
+                _showDialogMsg.value = Event("근무 기록 삭제에 성공하였습니다.")
+                _isShowProgressBar.value = Event(false)
+            }
+            .addOnFailureListener {
+                _showDialogMsg.value = Event("근무 기록 삭제에 실패하였습니다.")
+                _isShowProgressBar.value = Event(false)
+            }
+    }
+
     fun getSelectDateTask(selectDate : String){
         var selectDateTasks : ArrayList<TaskDTO> = arrayListOf()
         db.collection("tasks").document(selectDate).collection(selectDate).addSnapshotListener { value, error ->

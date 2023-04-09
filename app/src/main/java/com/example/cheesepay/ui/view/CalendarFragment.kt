@@ -65,6 +65,7 @@ class CalendarFragment : Fragment() {
             addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         }
 
+        // 근무기록 RecyclerView Item 클릭시 수정 페이지로 이동
         userTaskAdapter.setOnItemClickListener {
             val action = CalendarFragmentDirections.actionCalendarFragmentToModifyTaskFragment(it)
             findNavController().navigate(action)

@@ -21,7 +21,11 @@
         android:id="@+id/searchWorkerFragment"
         android:name="com.example.cheesepay.ui.view.SearchWorkerFragment"
         android:label="@string/search_worker"
-        tools:layout="@layout/fragment_search_worker"/>
+        tools:layout="@layout/fragment_search_worker">
+        <action
+            android:id="@+id/action_searchWorkerFragment_to_workerMontyPayFragment"
+            app:destination="@id/workerMontyPayFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addWorkerFragment"
         android:name="com.example.cheesepay.ui.view.AddWorkerFragment"
@@ -66,5 +70,14 @@
         <action
             android:id="@+id/action_modifyTaskFragment_to_confirmDialog"
             app:destination="@id/confirmDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/workerMontyPayFragment"
+        android:name="com.example.cheesepay.ui.view.WorkerMontyPayFragment"
+        android:label="WorkerMontyPayFragment"
+        tools:layout="@layout/fragment_worker_monty_pay">
+        <argument
+            android:name="workerInfo"
+            app:argType="com.example.cheesepay.model.WorkerDTO" />
     </fragment>
 </navigation>

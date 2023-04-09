@@ -77,6 +77,10 @@ class ModifyTaskFragment : Fragment() {
             saveTask()
         }
 
+        binding.btnDelete.setOnClickListener {
+            deleteTask()
+        }
+
         setEditTextChangeListener()
     }
 
@@ -121,6 +125,10 @@ class ModifyTaskFragment : Fragment() {
         )
 
         viewModel.uploadTaskInfo(taskDTO)
+    }
+
+    private fun deleteTask(){
+        viewModel.deleteTaskInfo(taskInfo)
     }
 
     private fun setEditTextChangeListener() {

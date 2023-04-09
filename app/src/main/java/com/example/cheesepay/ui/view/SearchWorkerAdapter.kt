@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cheesepay.R
 import com.example.cheesepay.databinding.ItemSearchWorkerBinding
+import com.example.cheesepay.model.TaskDTO
 import com.example.cheesepay.model.WorkerDTO
 
 class SearchWorkerAdapter() : RecyclerView.Adapter<SearchWorkerAdapter.CustomViewHolder>() {
@@ -22,6 +23,11 @@ class SearchWorkerAdapter() : RecyclerView.Adapter<SearchWorkerAdapter.CustomVie
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.binding.worker = workerList[position]
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let {
+                it(workerList[position])
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -33,4 +39,8 @@ class SearchWorkerAdapter() : RecyclerView.Adapter<SearchWorkerAdapter.CustomVie
         notifyDataSetChanged()
     }
 
+    private var onItemClickListener : ((WorkerDTO) -> Unit)? = null
+    fun setOnItemClickListener(listener : (WorkerDTO) -> Unit){
+        onItemClickListener = listener
+    }
 }
