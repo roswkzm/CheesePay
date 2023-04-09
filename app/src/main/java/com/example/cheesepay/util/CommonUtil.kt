@@ -10,7 +10,12 @@ class CommonUtil @Inject constructor(
 ){
 
      fun getSelectDateTime(date: Date) : String {
-        return SimpleDateFormat(dateFormat).format(date)
+        return SimpleDateFormat(YearMonthDayDateFormat).format(date)
+    }
+
+    fun getYearMonth(stringDate : String) : String {
+        val beforeDate = SimpleDateFormat(YearMonthDayDateFormat).parse(stringDate)
+        return SimpleDateFormat(YearMonthDateFormat).format(beforeDate)
     }
 
     fun getWithHoldingTax(hourPay : Int, workHour : Int) : Int{
@@ -19,6 +24,7 @@ class CommonUtil @Inject constructor(
 
     companion object{
         const val PICK_IMAGE_FROM_ALBUM = 999
-        const val dateFormat = "yyyy-MM-dd"
+        const val YearMonthDayDateFormat = "yyyy-MM-dd"
+        const val YearMonthDateFormat = "yyyy-MM"
     }
 }

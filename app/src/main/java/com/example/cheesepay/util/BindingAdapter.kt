@@ -21,3 +21,9 @@ fun bindBeforeTaxPay(view : TextView, taskDTO: TaskDTO){
     }
     view.text = inputText.toString()
 }
+
+@BindingAdapter("string_add_won")
+fun bindBeforeTaxPay(view : TextView, text: String){
+    var inputText = text + "원"
+    view.text = inputText
+}
