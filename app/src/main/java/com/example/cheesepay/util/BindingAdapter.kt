@@ -15,7 +15,7 @@ fun bindGlideDefault(view : ImageView, url : String){
 
 @BindingAdapter("before_tax_pay")
 fun bindBeforeTaxPay(view : TextView, taskDTO: TaskDTO){
-    var inputText : Int = (taskDTO.hourPay * taskDTO.workHour)
+    var inputText : Long = (taskDTO.hourPay * taskDTO.workHour)
     taskDTO.extraPay.let { extraPay ->
         inputText += extraPay!!
     }

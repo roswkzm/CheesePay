@@ -13,10 +13,11 @@
         <entry key="app/src/main/res/layout/fragment_add_task.xml" value="0.22962962962962963" />
         <entry key="app/src/main/res/layout/fragment_add_worker.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_modify_task.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/layout/fragment_modify_task.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_search_worker.xml" value="0.2049837199559013" />
         <entry key="app/src/main/res/layout/fragment_worker_monty_pay.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_search_worker.xml" value="0.24139492753623187" />
+        <entry key="app/src/main/res/layout/item_user_month_task.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_user_task.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_worker.xml" value="0.24139492753623187" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.153125" />

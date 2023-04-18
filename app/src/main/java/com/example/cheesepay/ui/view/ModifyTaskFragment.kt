@@ -61,7 +61,7 @@ class ModifyTaskFragment : Fragment() {
         // 시간 선택 스피너 세팅
         binding.spSelectHour.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.integer_array, R.layout.support_simple_spinner_dropdown_item)
         // 시간선택 스피너 초기값 세팅
-        binding.spSelectHour.setSelection(taskInfo.workHour - 1)
+        binding.spSelectHour.setSelection((taskInfo.workHour - 1).toInt())
         // 시급 세팅
         binding.etHourPay.setText(taskInfo.hourPay.toString())
         // 추가금액 세팅
@@ -117,11 +117,11 @@ class ModifyTaskFragment : Fragment() {
         val taskDTO : TaskDTO = TaskDTO(
             binding.tvDate.text.toString(),
             binding.tvWorkerName.text.toString(),
-            getHourPay().toInt(),
-            getWorkHour().toInt(),
-            getExtraPay().toInt(),
+            getHourPay().toLong(),
+            getWorkHour().toLong(),
+            getExtraPay().toLong(),
             binding.etExtraDescription.text.toString(),
-            binding.tvTotalPay.text.toString().toInt()
+            binding.tvTotalPay.text.toString().toLong()
         )
 
         viewModel.uploadTaskInfo(taskDTO)

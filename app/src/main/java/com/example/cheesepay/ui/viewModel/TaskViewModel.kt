@@ -7,12 +7,17 @@ import androidx.lifecycle.ViewModel
 import com.example.cheesepay.model.TaskDTO
 import com.example.cheesepay.model.WorkerDTO
 import com.example.cheesepay.util.CommonUtil
+import com.example.cheesepay.util.CommonUtil.Companion.YearMonthDayDateFormat
 import com.example.cheesepay.util.Event
+import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 @HiltViewModel
 class TaskViewModel @Inject constructor(
@@ -27,6 +32,15 @@ class TaskViewModel @Inject constructor(
     val showDialogMsg: LiveData<Event<String>> = _showDialogMsg
     private val _userTaskListData = MutableLiveData<ArrayList<TaskDTO>>()
     val userTaskListData: LiveData<ArrayList<TaskDTO>> = _userTaskListData
+
+
+    // 작업자에 대한 월별 데이터 리스트
+    private var workerMonthTaskList : ArrayList<TaskDTO> = arrayListOf()
+
+    private val _workerMonthTaskListData = MutableLiveData<ArrayList<TaskDTO>>()
+    val workerMonthTaskListData: LiveData<ArrayList<TaskDTO>> = _workerMonthTaskListData
+
+    val gson : Gson = Gson()
 
     private val db = Firebase.firestore
     private var workerNameList : ArrayList<String> = arrayListOf()
@@ -87,15 +101,40 @@ class TaskViewModel @Inject constructor(
     }
 
     fun getWorkerTaskDataSelectMonth(selectMonth : String, workerName : String){
-//        Log.d("ㅎㅇㅎㅇ11111", selectMonth)
-//        Log.d("ㅎㅇㅎㅇ22222", workerName)
-//        db.collection("tasks").document(selectDate).collection(selectDate).addSnapshotListener { value, error ->
-//            selectDateTasks.clear()
-//            if (value == null) return@addSnapshotListener
-//            for (snapshot in value.documents){
-//                selectDateTasks.add(snapshot.toObject(TaskDTO::class.java)!!)
-//            }
-//            _userTaskListData.value = selectDateTasks
-//        }
+        workerMonthTaskList.clear()
+        val abc = selectMonth.split("-")
+        var calendar = Calendar.getInstance()
+        calendar.set(abc[0].toInt(), abc[1].toInt() -1 , 1)
+        val monthEndDate = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+        for (i : Int in 1..monthEndDate){
+            val day = String.format("%02d", i)
+            val selectDate = "${selectMonth}-${day}"
+            db.collection("tasks").document(selectMonth).collection(selectDate).document(workerName).addSnapshotListener { value, error ->
+                if (value == null) return@addSnapshotListener
+
+                if (value.data != null){
+                    if (value.data!!.isNotEmpty()){
+                        var taskDTO : TaskDTO = dataParseTaskDTO(value.data!!)
+                        workerMonthTaskList.add(taskDTO)
+                    }
+                }
+                if (i == monthEndDate){
+                    _workerMonthTaskListData.value = workerMonthTaskList
+                    Log.d("${workerName}의 월별 개수 : ", workerMonthTaskListData.value!!.size.toString())
+                }
+            }
+        }
+    }
+
+    fun dataParseTaskDTO(data: MutableMap<String, Any>): TaskDTO {
+        var taskDTO = TaskDTO()
+        taskDTO.name = data["name"] as String
+        taskDTO.extraDescription = data["extraDescription"] as String?
+        taskDTO.extraPay = data["extraPay"] as Long?
+        taskDTO.hourPay = data["hourPay"] as Long
+        taskDTO.workHour = data["workHour"] as Long
+        taskDTO.date = data["date"] as String
+        taskDTO.totalPay = data["totalPay"] as Long
+        return taskDTO
     }
 }

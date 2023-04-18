@@ -10,15 +10,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.cheesepay.R
-import com.example.cheesepay.databinding.FragmentSearchWorkerBinding
 import com.example.cheesepay.databinding.FragmentWorkerMontyPayBinding
 import com.example.cheesepay.model.WorkerDTO
 import com.example.cheesepay.ui.viewModel.TaskViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import com.twinkle94.monthyearpicker.picker.YearMonthPickerDialog
-
-
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 
 
 class WorkerMontyPayFragment : Fragment() {
@@ -30,6 +31,7 @@ class WorkerMontyPayFragment : Fragment() {
     private lateinit var workerInfo : WorkerDTO
     private lateinit var yearMonthPickerDialog : YearMonthPickerDialog
     private lateinit var calendar : Calendar
+    lateinit var userTaskAdapter : UserTaskAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,10 +52,24 @@ class WorkerMontyPayFragment : Fragment() {
     }
 
     private fun initUI() {
-        setYearMonthPickerDialog()
-
         binding.btnSelectMonth.setOnClickListener {
             yearMonthPickerDialog.show()
+        }
+
+        setYearMonthPickerDialog()
+
+        userTaskAdapter = UserTaskAdapter(WorkerMontyPayFragment::class.java.simpleName)
+        binding.rvMonthTask.apply {
+            adapter = userTaskAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+            addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+        }
+
+        // 근무기록 RecyclerView Item 클릭시 수정 페이지로 이동
+        userTaskAdapter.setOnItemClickListener {
+            val action = WorkerMontyPayFragmentDirections.actionWorkerMontyPayFragmentToModifyTaskFragment(it)
+            findNavController().navigate(action)
         }
     }
 
@@ -74,7 +90,9 @@ class WorkerMontyPayFragment : Fragment() {
     }
 
     private fun subscribeUI() {
-
+        viewModel.workerMonthTaskListData.observe(viewLifecycleOwner, Observer { taskList ->
+            userTaskAdapter.setTaskData(taskList)
+        })
     }
 
     override fun onDestroyView() {

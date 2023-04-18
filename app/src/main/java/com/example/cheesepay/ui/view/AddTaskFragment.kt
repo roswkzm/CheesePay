@@ -105,11 +105,11 @@ class AddTaskFragment : Fragment() {
         val taskDTO : TaskDTO = TaskDTO(
             binding.tvDate.text.toString(),
             binding.spSelectWorker.selectedItem.toString(),
-            getHourPay().toInt(),
-            getWorkHour().toInt(),
-            getExtraPay().toInt(),
+            getHourPay().toLong(),
+            getWorkHour().toLong(),
+            getExtraPay().toLong(),
             binding.etExtraDescription.text.toString(),
-            binding.tvTotalPay.text.toString().toInt()
+            binding.tvTotalPay.text.toString().toLong()
         )
 
         viewModel.uploadTaskInfo(taskDTO)

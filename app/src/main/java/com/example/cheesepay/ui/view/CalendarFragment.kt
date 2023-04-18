@@ -57,7 +57,7 @@ class CalendarFragment : Fragment() {
     private fun initUI() {
         calendarView = binding.calendarView
 
-        userTaskAdapter = UserTaskAdapter()
+        userTaskAdapter = UserTaskAdapter(CalendarFragment::class.java.simpleName)
         binding.rvUserTask.apply {
             adapter = userTaskAdapter
             layoutManager = LinearLayoutManager(requireContext())
