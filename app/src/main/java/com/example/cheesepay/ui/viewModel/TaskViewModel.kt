@@ -37,8 +37,8 @@ class TaskViewModel @Inject constructor(
     // 작업자에 대한 월별 데이터 리스트
     private var workerMonthTaskList : ArrayList<TaskDTO> = arrayListOf()
 
-    private val _workerMonthTaskListData = MutableLiveData<ArrayList<TaskDTO>>()
-    val workerMonthTaskListData: LiveData<ArrayList<TaskDTO>> = _workerMonthTaskListData
+    private val _workerMonthTaskListData = MutableLiveData<Event<ArrayList<TaskDTO>>>()
+    val workerMonthTaskListData: LiveData<Event<ArrayList<TaskDTO>>> = _workerMonthTaskListData
 
     val gson : Gson = Gson()
 
@@ -114,13 +114,17 @@ class TaskViewModel @Inject constructor(
 
                 if (value.data != null){
                     if (value.data!!.isNotEmpty()){
+                        // FireStore는 자동 업데이트를 지원함 -> 자동 업데이트시에 데이터가 꼬이는 문제 발생 -> 직접 스캔한것이 아니면 return 함
+                        if (!value.toString().contains("SYNCED")){
+                            return@addSnapshotListener
+                        }
+                        Log.d("${workerName}의 업무 : ", value.data!!.toString())
                         var taskDTO : TaskDTO = dataParseTaskDTO(value.data!!)
                         workerMonthTaskList.add(taskDTO)
                     }
                 }
                 if (i == monthEndDate){
-                    _workerMonthTaskListData.value = workerMonthTaskList
-                    Log.d("${workerName}의 월별 개수 : ", workerMonthTaskListData.value!!.size.toString())
+                    _workerMonthTaskListData.value = Event(workerMonthTaskList)
                 }
             }
         }

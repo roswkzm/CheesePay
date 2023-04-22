@@ -59,11 +59,11 @@ class WorkerMontyPayFragment : Fragment() {
     }
 
     private fun initUI() {
+        setYearMonthPickerDialog()
+
         binding.btnSelectMonth.setOnClickListener {
             yearMonthPickerDialog.show()
         }
-
-        setYearMonthPickerDialog()
 
         userTaskAdapter = UserTaskAdapter(WorkerMontyPayFragment::class.java.simpleName)
         binding.rvMonthTask.apply {
@@ -91,35 +91,36 @@ class WorkerMontyPayFragment : Fragment() {
 
             binding.btnSelectMonth.text = dateFormat.format(calendar.time)
             binding.tvSelectMonth.text = dateFormat.format(calendar.time)
-
             viewModel.getWorkerTaskDataSelectMonth(dateFormat.format(calendar.time), workerInfo.name)
         }
     }
 
     private fun subscribeUI() {
-        viewModel.workerMonthTaskListData.observe(viewLifecycleOwner, Observer { taskList ->
-            userTaskAdapter.setTaskData(taskList)
+        viewModel.workerMonthTaskListData.observe(viewLifecycleOwner, Observer { it ->
+            it.getContentIfNotHandled()?.let { taskList ->
+                userTaskAdapter.setTaskData(taskList)
 
-            var monthTotalPay : Long = 0    // 근무 금액
-            var monthExtraPay : Long = 0    // 추가 금액
-            var monthTaxPay : Long = 0      // 세금 금액
-            var monthWorkerPay : Long = 0   // 세후 지급총액
-            for (task in taskList){
-                monthTotalPay += task.hourPay * task.workHour
+                var monthTotalPay : Long = 0    // 근무 금액
+                var monthExtraPay : Long = 0    // 추가 금액
+                var monthTaxPay : Long = 0      // 세금 금액
+                var monthWorkerPay : Long = 0   // 세후 지급총액
+                for (task in taskList){
+                    monthTotalPay += task.hourPay * task.workHour
 
-                task.extraPay?.let { it ->
-                    monthExtraPay += it
+                    task.extraPay?.let { it ->
+                        monthExtraPay += it
+                    }
+
+                    monthTaxPay += commonUtil.getWithHoldingTax(task.hourPay.toInt(), task.workHour.toInt())
+
+                    monthWorkerPay += task.totalPay
                 }
 
-                monthTaxPay += commonUtil.getWithHoldingTax(task.hourPay.toInt(), task.workHour.toInt())
-
-                monthWorkerPay += task.totalPay
+                binding.tvTotalPay.text = monthTotalPay.toString()
+                binding.tvExtraPay.text = monthExtraPay.toString()
+                binding.tvTaxPay.text = monthTaxPay.toString()
+                binding.tvWorkerPay.text = monthWorkerPay.toString()
             }
-
-            binding.tvTotalPay.text = monthTotalPay.toString()
-            binding.tvExtraPay.text = monthExtraPay.toString()
-            binding.tvTaxPay.text = monthTaxPay.toString()
-            binding.tvWorkerPay.text = monthWorkerPay.toString()
         })
     }
 
