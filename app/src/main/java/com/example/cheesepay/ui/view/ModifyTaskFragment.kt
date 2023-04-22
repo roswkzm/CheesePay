@@ -65,11 +65,11 @@ class ModifyTaskFragment : Fragment() {
         // 시급 세팅
         binding.etHourPay.setText(taskInfo.hourPay.toString())
         // 추가금액 세팅
-        taskInfo.extraPay.let { it ->
+        taskInfo.extraPay?.let { it ->
             binding.etExtraPay.setText(it.toString())
         }
         // 추가금액 지급사유 세팅
-        taskInfo.extraDescription.let { it ->
+        taskInfo.extraDescription?.let { it ->
             binding.etExtraDescription.setText(it)
         }
 

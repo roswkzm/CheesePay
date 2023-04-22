@@ -46,6 +46,11 @@
         <argument
             android:name="fromWhere"
             app:argType="string" />
+        <action
+            android:id="@+id/action_confirmDialog_to_calendarFragment2"
+            app:destination="@id/calendarFragment"
+            app:popUpTo="@id/calendarFragment"
+            app:popUpToInclusive="true" />
     </dialog>
     <fragment
         android:id="@+id/addTaskFragment"
@@ -69,7 +74,9 @@
             app:argType="com.example.cheesepay.model.TaskDTO" />
         <action
             android:id="@+id/action_modifyTaskFragment_to_confirmDialog"
-            app:destination="@id/confirmDialog" />
+            app:destination="@id/confirmDialog"
+            app:popUpTo="@id/modifyTaskFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/workerMontyPayFragment"

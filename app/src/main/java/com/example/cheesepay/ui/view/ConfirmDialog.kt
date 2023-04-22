@@ -1,6 +1,7 @@
 package com.example.cheesepay.ui.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,12 +35,8 @@ class ConfirmDialog : DialogFragment() {
         binding.tvMessage.text = message
 
         binding.btnOk.setOnClickListener {
-            dismiss()
-//            when(fromWhere){
-//                AddWorkerFragment::class.java.simpleName -> findNavController().navigate(R.id.calendarFragment)
-//                AddTaskFragment::class.java.simpleName -> findNavController().navigate(R.id.calendarFragment)
-//                else -> findNavController().navigate(R.id.calendarFragment)
-//            }
+            val action = ConfirmDialogDirections.actionConfirmDialogToCalendarFragment2()
+            findNavController().navigate(action)
         }
     }
 
