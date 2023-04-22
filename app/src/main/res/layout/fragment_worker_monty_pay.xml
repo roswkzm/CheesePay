@@ -65,7 +65,8 @@
             android:layout_margin="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleDivision" />
+            app:layout_constraintTop_toBottomOf="@id/titleDivision"
+            tools:listitem="@layout/item_user_month_task"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/month_pay_layout"
@@ -137,7 +138,7 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="총액  :  "
+                android:text="총액(시급 x 시간)  :  "
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/month_pay_layout"

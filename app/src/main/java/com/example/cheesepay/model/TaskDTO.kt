@@ -12,5 +12,5 @@ data class TaskDTO(
     var extraPay : Long? = null,     // 추가금액
     var extraDescription : String? = null,      // 추가금액 지급 사유
 //    var withHoldingTax : Int,     // 원천징수금액은 계산해서 구하자
-    var totalPay : Long = 0
+    var totalPay : Long = 0         // 세후금액
 ) : Parcelable

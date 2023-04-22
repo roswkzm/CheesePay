@@ -20,8 +20,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cheesepay.util.CommonUtil
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class WorkerMontyPayFragment : Fragment() {
 
     private var _binding : FragmentWorkerMontyPayBinding? = null
@@ -32,6 +36,9 @@ class WorkerMontyPayFragment : Fragment() {
     private lateinit var yearMonthPickerDialog : YearMonthPickerDialog
     private lateinit var calendar : Calendar
     lateinit var userTaskAdapter : UserTaskAdapter
+
+    @Inject
+    lateinit var commonUtil: CommonUtil
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,6 +99,27 @@ class WorkerMontyPayFragment : Fragment() {
     private fun subscribeUI() {
         viewModel.workerMonthTaskListData.observe(viewLifecycleOwner, Observer { taskList ->
             userTaskAdapter.setTaskData(taskList)
+
+            var monthTotalPay : Long = 0    // 근무 금액
+            var monthExtraPay : Long = 0    // 추가 금액
+            var monthTaxPay : Long = 0      // 세금 금액
+            var monthWorkerPay : Long = 0   // 세후 지급총액
+            for (task in taskList){
+                monthTotalPay += task.hourPay * task.workHour
+
+                task.extraPay?.let { it ->
+                    monthExtraPay += it
+                }
+
+                monthTaxPay += commonUtil.getWithHoldingTax(task.hourPay.toInt(), task.workHour.toInt())
+
+                monthWorkerPay += task.totalPay
+            }
+
+            binding.tvTotalPay.text = monthTotalPay.toString()
+            binding.tvExtraPay.text = monthExtraPay.toString()
+            binding.tvTaxPay.text = monthTaxPay.toString()
+            binding.tvWorkerPay.text = monthWorkerPay.toString()
         })
     }
 

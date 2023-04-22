@@ -14,7 +14,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/userTaskLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/tv_date"
@@ -23,9 +25,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:text="2023-04-15"
+            android:text="@{userTask.date}"
             android:textSize="18dp"
             android:textStyle="bold"
+            tools:text="2023-04-15"
             />
 
         <TextView
